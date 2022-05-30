@@ -4,6 +4,7 @@ const model = require("../database/model.js");
 function get(request, response) {
   const title = "SeliBay-home";
   let header = `
+
   <h1>SeliBay</h1>
   <header>
   <a href="#">log-out</a>
@@ -38,6 +39,7 @@ function get(request, response) {
     </header>`;
     form = "";
   }
+
   let posts = "";
 
   return model.getPosts().then((data) => {

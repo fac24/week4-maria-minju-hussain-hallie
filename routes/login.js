@@ -24,6 +24,7 @@ function post(request, response) {
   auth
     .verifyUser(username, password)
     .then((user) => {
+      console.log(user);
       // if user exists create new session in database
       if (user) {
         // return the sid to the next then

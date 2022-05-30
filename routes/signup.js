@@ -7,7 +7,8 @@ function get(request, response) {
         <form method="POST">
             <label for="username">username: <input type="text" name="username" id="username"></label>
             <label for="password">password: <input type="password" name="password" id="password"></label>
-        </form>
+            <button type="submit">Sign up</button>
+            </form>
     `;
   response.send(layout("signup", body));
 }

@@ -9,6 +9,14 @@ const COOKIE_OPTIONS = {
   signed: true,
 };
 
+function createUser(username, password) {
+  const sid = crypto.randomBytes(18).toString("base64");
+  return bcrypt
+    .hash(password, 10)
+    .then((hash) => model.createUser(username, hash))
+    .then((user) => model.createSession(sid, user));
+}
+
 function verifyUser(username, password) {
   return model.getUser(username).then((user) => {
     if (!user) {
@@ -20,9 +28,4 @@ function verifyUser(username, password) {
   });
 }
 
-function createSession(user) {
-  const sid = crypto.randomBytes(18).toString("base64");
-  return model.createSession(sid, { user }).then((sid) => sid);
-}
-
-module.exports = { COOKIE_OPTIONS, verifyUser, createSession };
+module.exports = { COOKIE_OPTIONS, verifyUser, createUser };

@@ -6,8 +6,8 @@ set -e
 psql -q -c "CREATE USER seller SUPERUSER"
 echo "Created Postgres user 'seller'"
 
-psql -q -c "CREATE DATABASE SeliBay WITH OWNER seller"
-echo "Created Postgres database 'SeliBay'"
+psql -q -c "CREATE DATABASE selibay WITH OWNER seller"
+echo "Created Postgres database 'selibay'"
 
-echo "DATABASE_URL='postgres://seller:@localhost:5432/SeliBay'" > .env
+echo "DATABASE_URL='postgres://seller:@localhost:5432/selibay'" > .env
 echo "Created .env containing DATABASE_URL"

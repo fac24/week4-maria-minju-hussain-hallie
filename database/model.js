@@ -1,25 +1,29 @@
-const db = require("./connection.js");
+const db = require("./connection");
 
-// Get the user info from the database on login
 function getUser(username) {
-  const SELECT_USER = `
-    SELECT id, username, password FROM users WHERE username=$1
+  const query_text = /*sql*/ `SELECT * FROM users WHERE username=$1`;
+  return db.query(query_text, [username]).then((result) => result.rows[0]);
+}
+
+function createUser(username, hash) {
+  const query_text = /*sql*/ `
+  INSERT INTO users (username, password) VALUES ($1,$2)
+  RETURNING username, password
   `;
-  return db.query(SELECT_USER, [username]).then((result) => result.rows[0]);
+  return db
+    .query(query_text, [username, hash])
+    .then((result) => result.rows[0]);
 }
 
 // Create a new session in the sessions table (on login)
-function createSession(sid, data) {
+function createSession(sid, user) {
   const INSERT_SESSION = `
-    INSERT INTO sessions (sid, data) VALUES ($1, $2)
-    RETURNING sid
-  `;
+      INSERT INTO sessions (sid, data) VALUES ($1, $2)
+      RETURNING sid,data
+    `;
   return db
-    .query(INSERT_SESSION, [sid, data])
+    .query(INSERT_SESSION, [sid, user])
     .then((result) => result.rows[0].sid);
 }
 
-module.exports = {
-  getUser,
-  createSession,
-};
+module.exports = { getUser, createUser, createSession };

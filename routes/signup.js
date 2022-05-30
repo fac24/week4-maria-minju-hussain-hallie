@@ -6,8 +6,8 @@ function get(request, response) {
   const body = /*html*/ `
     <h1>Please sign up here</h1>
         <form method="POST">
-            <label for="username">username: <input type="text" name="username" id="username"></label>
-            <label for="password">password: <input type="password" name="password" id="password"></label>
+            <label for="username">Username <input type="text" name="username" id="username"></label>
+            <label for="password">Password <input type="password" name="password" id="password"></label>
             <button type="submit">Sign up</button>
         </form>
     `;

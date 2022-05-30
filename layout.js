@@ -1,5 +1,5 @@
 function layout(title, content) {
-    return /*html*/ `<!DOCTYPE html>
+  return /*html*/ `<!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -7,13 +7,13 @@ function layout(title, content) {
     <meta name="description" content="App for selling anything you want to sell">
     <title>${title}</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js defer></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     ${content}
   </body>
   </html>
     `;
-  }
-  
-  module.exports = layout;
+}
+
+module.exports = layout;

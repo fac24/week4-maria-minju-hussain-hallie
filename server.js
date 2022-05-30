@@ -1,9 +1,8 @@
 const express = require("express");
 const server = express();
-const signup = require('./routes/signup.js');
-const home = require('./routes/home.js')
-const logger = require('./middleware/logger')
-
+const signup = require("./routes/signup.js");
+const home = require("./routes/home.js");
+const logger = require("./middleware/logger");
 
 const bodyHandler = express.urlencoded({ extended: false });
 const staticHandler = express.static("public");
@@ -13,12 +12,12 @@ server.use(cookieParser());
 
 server.use(bodyHandler);
 server.use(staticHandler);
-server.use(logger)
+server.use(logger);
 
-server.get('/signup', signup.get)
-server.post('/signup',signup.post)
+server.get("/", home.get);
 
-server.get('/',home.get)
+server.get("/signup", signup.get);
+server.post("/signup", signup.post);
 
 const PORT = process.env.PORT || 3000;
 

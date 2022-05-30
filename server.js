@@ -1,6 +1,7 @@
 const express = require("express");
 const server = express();
 const signup = require("./routes/signup.js");
+const login = require("./routes/login");
 const home = require("./routes/home.js");
 const logger = require("./middleware/logger");
 
@@ -18,6 +19,11 @@ server.get("/", home.get);
 
 server.get("/signup", signup.get);
 server.post("/signup", signup.post);
+
+server.get("/", home.get);
+
+server.get("/login", login.get);
+server.post("/login", login.post);
 
 const PORT = process.env.PORT || 3000;
 

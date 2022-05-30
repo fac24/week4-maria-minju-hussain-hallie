@@ -17,4 +17,15 @@ function createUser(username, password) {
     .then((user) => model.createSession(sid, user));
 }
 
-module.exports = { COOKIE_OPTIONS, createUser };
+function verifyUser(username, password) {
+  return model.getUser(username).then((user) => {
+    if (!user) {
+      return false;
+    } else {
+      // bcrypt compare will have to happen password
+      return user;
+    }
+  });
+}
+
+module.exports = { COOKIE_OPTIONS, verifyUser, createUser };

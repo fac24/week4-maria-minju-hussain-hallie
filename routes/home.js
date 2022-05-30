@@ -6,8 +6,15 @@ const layout = require("../layout.js");
 
 function get(request, response) {
   const title = "SeliBay-HOME";
-  let form = `
+  let html = `
   <h1>${title}</h1>
+
+  <header>
+  <a href="#">log-out</a>
+  <a href="#">my items</a>
+</header>
+
+
   <form action="/post" method="post" enctype="multipart/form-data">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
@@ -35,10 +42,15 @@ function get(request, response) {
   let loggedIn = false;
 
   if (!loggedIn) {
-    form = `<h1>${title}</h1>`;
+    html = `<h1>${title}</h1>
+    <header>
+    <a href="/signup">sign-up</a>
+    <a href="/login">login</a>
+  </header>
+    `;
   }
 
-  response.send(layout(title, form));
+  response.send(layout(title, html));
 }
 
 module.exports = { get };

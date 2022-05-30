@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# stop script when an error occurs
+set -e
+
+psql -q -c "CREATE USER seller SUPERUSER"
+echo "Created Postgres user 'seller'"
+
+psql -q -c "CREATE DATABASE SeliBay WITH OWNER seller"
+echo "Created Postgres database 'SeliBay'"
+
+echo "DATABASE_URL='postgres://seller:@localhost:5432/SeliBay'" > .env
+echo "Created .env containing DATABASE_URL"

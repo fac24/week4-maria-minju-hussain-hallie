@@ -2,7 +2,7 @@ const express = require("express");
 const res = require("express/lib/response");
 const server = express();
 
-server.get("/", (req, resp) => {
+server.get("/", (req, res) => {
   res.send("<h1>WALLA</h1>");
 });
 

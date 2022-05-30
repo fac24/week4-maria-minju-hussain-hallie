@@ -5,22 +5,10 @@ function get(request, response) {
   const body = /*html*/ `
     <h1>Please sign up here</h1>
         <form method="POST">
-            <label for="username">username:</label>
-            <input type="text" name="username" id="username" required/><br>
-
-            <label for="password">password:</label>
-            <div id="requirements">
-                Please enter at least 6 characters containing at least 1 number
-            </div>
-            <input type="password" 
-            id="password"
-            type="password"
-            aria-describedby="passwordRequirements"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-            required/><br>
-
+            <label for="username">username: <input type="text" name="username" id="username"></label>
+            <label for="password">password: <input type="password" name="password" id="password"></label>
             <button type="submit">Sign up</button>
-        </form>
+            </form>
     `;
   response.send(layout("signup", body));
 }

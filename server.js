@@ -1,5 +1,10 @@
 const express = require("express");
+const res = require("express/lib/response");
 const server = express();
+
+server.get("/", (req, resp) => {
+  res.send("<h1>WALLA</h1>");
+});
 
 const PORT = process.env.PORT || 3000;
 

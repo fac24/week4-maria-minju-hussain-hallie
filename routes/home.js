@@ -1,29 +1,26 @@
 const layout = require("../layout.js");
+const model = require("../database/model.js");
 
 //creaete form
 //create database query
 //
 
 function get(request, response) {
-  const title = "SeliBay-HOME";
+  const title = "SeliBay-home";
   let html = `
-  <h1>${title}</h1>
-
+  <h1>SeliBay</h1>
   <header>
   <a href="#">log-out</a>
   <a href="#">my items</a>
 </header>
+  `;
 
-
-  <form action="/post" method="post" enctype="multipart/form-data">
+  let form = `<form action="/post" method="post" enctype="multipart/form-data">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
 
   <label for="product-price"> Product Price </label>
   <input type="number" id="product-price" name ="item_price"/>
-
-
-
   <label for="product-discrption"> Product discrption </label>
   <textarea
     name="item_info"
@@ -39,18 +36,18 @@ function get(request, response) {
   <button type="submit">submit</button>
 </form>`;
 
-  let loggedIn = false;
+  let loggedIn = request.signedCookies.sid;
 
   if (!loggedIn) {
     html = `<h1>${title}</h1>
     <header>
     <a href="/signup">sign-up</a>
     <a href="/login">login</a>
-  </header>
-    `;
+    </header>`;
+    form = "";
   }
 
-  response.send(layout(title, html));
+  response.send(layout(title, html.concat(form)));
 }
 
 module.exports = { get };

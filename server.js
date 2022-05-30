@@ -1,10 +1,11 @@
 const express = require("express");
-const res = require("express/lib/response");
 const server = express();
 
-server.get("/", (req, res) => {
-  res.send("<h1>WALLA</h1>");
-});
+const bodyHandler = express.urlencoded({ extended: false });
+const staticHandler = express.static("public");
+
+server.use(bodyHandler);
+server.use(staticHandler);
 
 const PORT = process.env.PORT || 3000;
 

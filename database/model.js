@@ -33,7 +33,7 @@ function getPosts() {
     FROM users
     INNER JOIN posts
     ON users.id = posts.user_id`;
-  return db.query(SELECT_POSTS).then((results) => results);
+  return db.query(SELECT_POSTS).then((results) => results.rows);
 }
 
-module.exports = { getUser, createUser, createSession };
+module.exports = { getUser, createUser, createSession, getPosts };

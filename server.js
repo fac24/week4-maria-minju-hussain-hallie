@@ -7,13 +7,14 @@ const cookieParser = require("cookie-parser");
 
 const login = require("./routes/login.js");
 
-server.use(cookieParser());
+server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.use(bodyHandler);
 server.use(staticHandler);
 
 server.get("/login", login.get);
+server.post("/login", login.post);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

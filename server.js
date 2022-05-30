@@ -3,6 +3,9 @@ const server = express();
 
 const bodyHandler = express.urlencoded({ extended: false });
 const staticHandler = express.static("public");
+const cookieParser = require("cookie-parser");
+
+server.use(cookieParser());
 
 server.use(bodyHandler);
 server.use(staticHandler);

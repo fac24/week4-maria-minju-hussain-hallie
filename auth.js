@@ -31,4 +31,11 @@ function verifyUser(username, password) {
   });
 }
 
-module.exports = { COOKIE_OPTIONS, verifyUser, createUser };
+function createSession(user) {
+  const sid = crypto.randomBytes(18).toString("base64");
+  return model.createSession(sid, user).then((result) => {
+    return result.sid;
+  });
+}
+
+module.exports = { COOKIE_OPTIONS, verifyUser, createUser, createSession };

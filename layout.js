@@ -6,7 +6,8 @@ function layout(title, content) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="App for selling anything you want to sell">
     <title>${title}</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js defer></script>
   </head>
   <body>
     ${content}

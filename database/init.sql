@@ -14,6 +14,7 @@ CREATE TABLE sessions(
 );
 
 CREATE TABLE posts(
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
     item_name VARCHAR(255) NOT NULL UNIQUE,
     item_price decimal(12,2) NOT NULL,

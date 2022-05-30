@@ -8,7 +8,7 @@ const bodyHandler = express.urlencoded({ extended: false });
 const staticHandler = express.static("public");
 const cookieParser = require("cookie-parser");
 
-server.use(cookieParser());
+server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.use(bodyHandler);
 server.use(staticHandler);

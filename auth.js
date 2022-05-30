@@ -14,12 +14,7 @@ function createUser(username, password) {
   return bcrypt
     .hash(password, 10)
     .then((hash) => model.createUser(username, hash))
-    .then((user) => createSession(user));
+    .then((user) => model.createSession(sid, user));
 }
 
-function createSession(user) {
-  const sid = crypto.randomBytes(18).toString("base64");
-  return model.createSession(sid, { user }).then((sid) => sid);
-}
-
-module.exports = { COOKIE_OPTIONS, createUser, createSession };
+module.exports = { COOKIE_OPTIONS, createUser };

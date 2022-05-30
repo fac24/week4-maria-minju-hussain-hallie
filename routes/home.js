@@ -43,7 +43,7 @@ function get(request, response) {
     <header>
     <a href="/signup">sign-up</a>
     <a href="/login">login</a>
-    </header>`;
+  </header>`;
     form = "";
   }
 

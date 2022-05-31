@@ -21,13 +21,11 @@ server.get("/", home.get);
 server.get("/signup", signup.get);
 server.post("/signup", signup.post);
 
-server.get("/", home.get);
-
 server.get("/login", login.get);
 server.post("/login", login.post);
 
 server.post("/logout", logout.post);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

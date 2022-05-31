@@ -4,7 +4,7 @@ const layout = require("../layout.js");
 function get(request, response) {
   let loggedIn = request.signedCookies.sid;
 
-  if (loggedIn === undefined) {
+  if (!loggedIn) {
     response.send(
       layout("My items", `<a href="/login">Please login to view this page</a>`)
     );

@@ -19,24 +19,36 @@ function get(request, response) {
 
     const posts = "";
 
-    return (
-      model
-        .getSessions() // Get the logged in users ID from sessions table
-        .then((sessions) => sessions.data.id)
-        .then((id) => model.userPosts(id))
-        .then((data) => console.log(data))
-        // HERE WE WILL USE THE SAME LOGIC IN HOME TO DISPLAY DATA
-        .then(response.send(layout("My items", header.concat(posts))))
-        .catch(() => {
-          response.status(401).send(
-            layout(
-              `Error`,
-              `<h1>Whoops, something went wrong 😢</h1>
+    return model
+      .getSessions() // Get the logged in users ID from sessions table
+      .then((sessions) => sessions.data.id)
+      .then((id) => model.userPosts(id))
+      .then((data) => {
+        data.forEach((item) => {
+          return (posts =
+            posts +
+            //we still need to add the image!
+            `<div>
+    <form action="/delete" method="POST">
+          <button type="submit" aria-label="Delete" name="post-id" value="${item.id}">x</button>
+     </form>
+     <p>${item.username}</p>
+     ${deleteButton}
+     <p>${item.item_name}</p>
+     <p>${item.item_info}</p>
+     </div>`);
+        });
+      })
+      .then(response.send(layout("My items", header.concat(posts))))
+      .catch(() => {
+        response.status(401).send(
+          layout(
+            `Error`,
+            `<h1>Whoops, something went wrong 😢</h1>
             <a href="/"/>Click here to go back to the homepage</a>`
-            )
-          );
-        })
-    );
+          )
+        );
+      });
   }
 }
 

@@ -19,9 +19,20 @@ function post(request, response) {
   model.getUser(username).then((user) => {
     //If database doesn't have username that user typed then will return user as undefined
     if (user === undefined) {
-      auth.createUser(username, password).then((sid) => {
-        response.cookie("sid", sid, auth.COOKIE_OPTIONS).redirect("/");
-      });
+      auth
+        .createUser(username, password)
+        .then((sid) => {
+          response.cookie("sid", sid, auth.COOKIE_OPTIONS).redirect("/");
+        })
+        .catch(() => {
+          response.status(401).send(
+            layout(
+              `Error`,
+              `<h1>Whoops, something went wrong 😢</h1>
+            <a href="/"/>Click here to go back to the homepage</a>`
+            )
+          );
+        });
     } else {
       //need some middleware for checking duplicated username for user
       console.log("duplicated username");

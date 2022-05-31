@@ -4,6 +4,7 @@ const signup = require("./routes/signup.js");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const home = require("./routes/home.js");
+const logout = require("./routes/logout.js");
 const logger = require("./middleware/logger");
 
 const bodyHandler = express.urlencoded({ extended: false });

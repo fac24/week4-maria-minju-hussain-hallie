@@ -4,7 +4,6 @@ const model = require("../database/model.js");
 function get(request, response) {
   const title = "SeliBay-home";
   let header = "";
-
   let form = `
   <form action="/post" method="post" enctype="multipart/form-data">
   <label for="product-name"> Product Name </label>
@@ -60,14 +59,14 @@ function get(request, response) {
      <p>${item.item_info}</p>
      </div>`);
       });
-      response.send(layout("SeliBay-home", header.concat(form)));
+      response.send(layout("SeliBay-home", header.concat(form + posts)));
     })
     .catch(() => {
       response.status(401).send(
         layout(
           `Error`,
           `<h1>Whoops, something went wrong 😢</h1>
-          <a href="/"/>Click here to go back to the homepage</a>`
+        <a href="/"/>Click here to go back to the homepage</a>`
         )
       );
     });

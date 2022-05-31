@@ -5,10 +5,20 @@ const auth = require("../auth.js");
 function get(request, response) {
   const body = /*html*/ `
     <h1>Please sign up here</h1>
-        <form method="POST">
-            <label for="username">Username <input type="text" name="username" id="username"></label>
-            <label for="password">Password <input type="password" name="password" id="password"></label>
-            <button type="submit">Sign up</button>
+        <form method="POST" action ="/signup">
+       
+        <label for="username"> Username <span aria-hidden="true">*</span></label>
+        <input type="text" name="username" id="username" required/>
+
+        <label for="password"> Password <span aria-hidden="true">*</span></label>
+        <div id="passwordRequirements" class="requirements">Password should be at least 6 characters long</div>
+        <input type="password"
+               id="password"
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+
+        <button type="submit" aria-label="click button to submit">Submit</button>
+        
         </form>
     `;
   response.send(layout("signup", body));

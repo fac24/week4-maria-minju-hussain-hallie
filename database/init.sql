@@ -19,7 +19,7 @@ CREATE TABLE posts(
     item_name VARCHAR(255) NOT NULL UNIQUE,
     item_price decimal(12,2) NOT NULL,
     item_info TEXT NOT NULL,
-    item_image TEXT NOT NULL -- image URL--
+    item_image BYTEA NOT NULL -- image URL--
 );
 
 COMMIT;

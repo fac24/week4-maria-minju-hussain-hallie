@@ -25,7 +25,7 @@ function get(request, response) {
   let loggedIn = request.signedCookies.sid;
 
   // if user is not logged in they have a differnent header
-  if (loggedIn == undefined) {
+  if (!loggedIn) {
     header = `<h1>${title}</h1>
     <header>
     <a href="/signup">sign-up</a>

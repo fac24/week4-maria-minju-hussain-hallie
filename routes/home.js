@@ -41,7 +41,7 @@ function get(request, response) {
   <form action="/logout" method="post">
   <button>Logout</button>
   </form>
-  <a href="#">my items</a>
+  <a href="/myitems">my items</a>
   <p>you will see the add form because you are logged in</p>
   </header>
   `;

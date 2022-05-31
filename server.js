@@ -5,6 +5,7 @@ const login = require("./routes/login");
 const logout = require("./routes/logout");
 const home = require("./routes/home.js");
 const deletePost = require("./routes/delete.js");
+const myitems = require("./routes/myitems.js");
 const logger = require("./middleware/logger");
 
 const bodyHandler = express.urlencoded({ extended: false });
@@ -24,6 +25,8 @@ server.post("/signup", signup.post);
 
 server.get("/login", login.get);
 server.post("/login", login.post);
+
+server.get("/myitems", myitems.get);
 
 server.post("/logout", logout.post);
 

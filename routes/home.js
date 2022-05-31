@@ -10,10 +10,10 @@ function get(request, response) {
   <input type="text" id="product-name" name="item_name" />
   <label for="product-price"> Product Price </label>
   <input type="number" id="product-price" name ="item_price"/>
-  <label for="product-discrption"> Product discrption </label>
+  <label for="product-discription"> Product discription </label>
   <textarea
   name="item_info"
-  id="product-discrption"
+  id="product-discription"
   cols="30"
   rows="10"
   ></textarea>

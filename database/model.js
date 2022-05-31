@@ -40,6 +40,12 @@ function getPosts() {
   return db.query(SELECT_POSTS).then((results) => results.rows);
 }
 
+// Delete post from the database
+function deletePost(postId, userID) {
+  const DELETE_POST = `DELETE FROM posts WHERE id=$1`;
+  return db.query(DELETE_POST, [postId]).then((results) => results.rows);
+}
+
 // Get signed in user ID for delete button functionality
 function getSessions() {
   const SELECT_SESSION = `SELECT data FROM sessions`;
@@ -55,4 +61,5 @@ module.exports = {
   deleteSession,
   getPosts,
   getSessions,
+  deletePost,
 };

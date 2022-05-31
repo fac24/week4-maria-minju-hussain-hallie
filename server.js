@@ -4,6 +4,7 @@ const signup = require("./routes/signup.js");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const home = require("./routes/home.js");
+const deletePost = require("./routes/delete.js");
 const logger = require("./middleware/logger");
 
 const bodyHandler = express.urlencoded({ extended: false });
@@ -25,6 +26,8 @@ server.get("/login", login.get);
 server.post("/login", login.post);
 
 server.post("/logout", logout.post);
+
+server.post("/delete", deletePost.post);
 
 const PORT = process.env.PORT || 3000;
 

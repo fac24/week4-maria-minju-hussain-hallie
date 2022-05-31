@@ -24,7 +24,7 @@ CREATE TABLE posts(
 
 INSERT INTO users (username, password) VALUES
   ('username', 'password'),
-  ('username2', 'password'),
+  ('username2', 'password')
   ;
 
 INSERT INTO posts (user_id, item_name, item_price, item_info, item_image) VALUES

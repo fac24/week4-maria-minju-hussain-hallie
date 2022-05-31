@@ -33,11 +33,33 @@ function deleteSession(sid) {
 // Get posts from database
 function getPosts() {
   const SELECT_POSTS = `
-    SELECT users.username, posts.id, posts.item_name, posts.item_info, posts.item_image
+    SELECT users.username, posts.id, posts.user_id, posts.item_name, posts.item_info, posts.item_image
     FROM users
     INNER JOIN posts
     ON users.id = posts.user_id`;
   return db.query(SELECT_POSTS).then((results) => results.rows);
 }
 
-module.exports = { getUser, createUser, createSession, deleteSession, getPosts };
+// Delete post from the database
+function deletePost(postId, userID) {
+  const DELETE_POST = `DELETE FROM posts WHERE id=$1`;
+  return db.query(DELETE_POST, [postId]).then((results) => results.rows);
+}
+
+// Get signed in user ID for delete button functionality
+function getSessions() {
+  const SELECT_SESSION = `SELECT data FROM sessions`;
+  return db
+    .query(SELECT_SESSION)
+    .then((results) => results.rows[results.rows.length - 1]);
+}
+
+module.exports = {
+  getUser,
+  createUser,
+  createSession,
+  deleteSession,
+  getPosts,
+  getSessions,
+  deletePost,
+};

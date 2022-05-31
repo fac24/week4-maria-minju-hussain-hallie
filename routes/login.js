@@ -2,6 +2,16 @@ const auth = require("../auth.js");
 const layout = require("../layout.js");
 
 function get(request, response) {
+  header = `
+    <div class="flex">
+  <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
+    <header>
+    <div>
+    <a href="/signup" class="button signup">sign-up</a>
+    </div>
+    </div>
+    </header>`;
+
   const html = layout(
     "Login to selibay",
     `   
@@ -11,10 +21,10 @@ function get(request, response) {
         <input type="text" id="username" name="username">
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
-        <button>Log in</button>
+        <button class="button login">Log in</button>
       </form>`
   );
-  response.send(html);
+  response.send(header.concat(html));
 }
 
 function post(request, response) {
@@ -35,7 +45,7 @@ function post(request, response) {
           <input type="text" id="username" name="username">
           <label for="password">Password</label>
           <input type="password" id="password" name="password">
-          <button>Log in</button>
+          <button class="button login">Log in</button>
           <p>Username or password incorrect or not found. Please log in again or sign up.</p>
           </form>
           `

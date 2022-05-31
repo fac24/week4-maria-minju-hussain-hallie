@@ -2,10 +2,10 @@ const layout = require("../layout.js");
 const model = require("../database/model.js");
 
 function get(request, response) {
-  const title = "SeliBay-home";
+  const title = "seliBay";
   let header = "";
   let form = `
-  <form action="/post" method="post" enctype="multipart/form-data">
+  <form action="/post" method="post" enctype="multipart/form-data" class="form">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
   <label for="product-price"> Product Price </label>
@@ -19,30 +19,35 @@ function get(request, response) {
   ></textarea>
   <label for="uploaded-file"> upload Image </label>
   <input type="file" id="uploaded-file" name="item_image"/>
-  <button type="submit">submit</button>
+  <button type="submit" class="button login">submit</button>
   </form>`;
 
   let loggedIn = request.signedCookies.sid;
 
   // if user is not logged in they have a differnent header
   if (!loggedIn) {
-    header = `<h1>${title}</h1>
+    header = `
+    <div class="flex">
+  <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
     <header>
-    <a href="/signup">sign-up</a>
-    <a href="/login">login</a>
-    <p>there will be no form for you because not logged in</p>
+    <div>
+    <a href="/signup" class="button signup">sign-up</a>
+    <a href="/login" class="button login">login</a>
+    </div>
+    </div>
     </header>`;
     form = ""; //if user is not logged in they don't have access to form!
   } else {
     header = `
-  <h1>SeliBay</h1>
-  <header>
-  <form action="/logout" method="post">
-  <button>Logout</button>
-  </form>
-  <a href="#">my items</a>
-  <p>you will see the add form because you are logged in</p>
-  </header>
+    <header class="flex">
+    <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
+    <div>
+    <form action="/logout" method="post">
+    <button class="button logout">Logout</button>
+    </form>
+    <a href="/myitems" class="button login">My items</a>
+    </div>
+    </header>
   `;
   }
   let posts = "";
@@ -65,7 +70,7 @@ function get(request, response) {
           posts +
           //we still need to add the image!
           `
-     <div>
+     <div class="post-container">
      <p>${item.username}</p>
      ${deleteButton}
      <p>${item.item_name}</p>
@@ -75,13 +80,14 @@ function get(request, response) {
       response.send(layout("SeliBay-home", header.concat(form + posts)));
     })
     .catch(() => {
-      response.status(401).send(
-        layout(
-          `Error`,
-          `<h1>Whoops, something went wrong 😢</h1>
-        <a href="/"/>Click here to go back to the homepage</a>`
-        )
-      );
+      response
+        .status(401)
+        .send(
+          layout(
+            `Error`,
+            header.concat(`<h1>Whoops, something went wrong 😢</h1>`)
+          )
+        );
     });
 }
 

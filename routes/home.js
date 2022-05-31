@@ -80,13 +80,14 @@ function get(request, response) {
       response.send(layout("SeliBay-home", header.concat(form + posts)));
     })
     .catch(() => {
-      response.status(401).send(
-        layout(
-          `Error`,
-          `<h1>Whoops, something went wrong 😢</h1>
-        <a href="/"/>Click here to go back to the homepage</a>`
-        )
-      );
+      response
+        .status(401)
+        .send(
+          layout(
+            `Error`,
+            header.concat(`<h1>Whoops, something went wrong 😢</h1>`)
+          )
+        );
     });
 }
 

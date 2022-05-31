@@ -17,7 +17,7 @@ function get(request, response) {
                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/><br><br>
 
-        <button type="submit" aria-label="click button to submit">Submit</button>
+        <button type="submit" class="button login" aria-label="click button to submit">Submit</button>
         
         </form>
     `;

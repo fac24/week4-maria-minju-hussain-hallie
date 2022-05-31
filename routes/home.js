@@ -46,18 +46,27 @@ function get(request, response) {
   `;
   }
   let posts = "";
+  let userID;
 
   return model
-    .getPosts()
+    .getSessions() // Get the logged in users ID from sessions table
+    .then((sessions) => (userID = sessions.data.id)) // Save it to the global variable to use later
+    .then(model.getPosts)
     .then((data) => {
       data.forEach((item) => {
-        console.log(item);
+        let deleteButton = "";
+        if (item.user_id === userID) {
+          deleteButton = `<form action="/delete" method="post">
+          <button type="submit" aria-label="Delete" name="post-id" value="${item.id}">x</button>
+          </form>`;
+        }
         return (posts =
           posts +
           //we still need to add the image!
           `
      <div>
      <p>${item.username}</p>
+     ${deleteButton}
      <p>${item.item_name}</p>
      <p>${item.item_info}</p>
      </div>`);

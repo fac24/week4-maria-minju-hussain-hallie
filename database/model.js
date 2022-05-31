@@ -17,13 +17,11 @@ function createUser(username, hash) {
 
 // Create a new session in the sessions table (on login)
 function createSession(sid, user) {
-  const INSERT_SESSION = `
+  const INSERT_SESSION = /*sql*/ `
       INSERT INTO sessions (sid, data) VALUES ($1, $2)
       RETURNING sid,data
     `;
-  return db
-    .query(INSERT_SESSION, [sid, user])
-    .then((result) => result.rows[0].sid);
+  return db.query(INSERT_SESSION, [sid, user]).then((result) => result.rows[0]);
 }
 
 module.exports = { getUser, createUser, createSession };

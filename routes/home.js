@@ -37,7 +37,9 @@ function get(request, response) {
     header = `
   <h1>SeliBay</h1>
   <header>
-  <a href="#">log-out</a>
+  <form action="/logout" method="post">
+  <button>Logout</button>
+  </form>
   <a href="#">my items</a>
   <p>you will see the add form because you are logged in</p>
   </header>
@@ -60,7 +62,7 @@ function get(request, response) {
      <p>${item.item_info}</p>
      </div>`);
       });
-      response.send(layout("SeliBay-home", header.concat(form)));
+      response.send(layout("SeliBay-home", header.concat(form + posts)));
     })
     .catch(() => {
       response.status(401).send(

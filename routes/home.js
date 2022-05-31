@@ -15,7 +15,7 @@ function get(request, response) {
 </header>
   `;
 
-  let form = `<form action="/post" method="post" enctype="multipart/form-data">
+  let form = `<form action="/add-post" method="post" enctype="multipart/form-data">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
 

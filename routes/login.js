@@ -24,26 +24,27 @@ function post(request, response) {
   auth
     .verifyUser(username, password)
     .then((user) => {
-      // if user exists create new session in database
-      if (user) {
+      if (!user) {
         // return the sid to the next then
-        return auth.createSession(user);
-      } else {
         const html = layout(
           "Login to selibay",
-          `   
-        <h2>Please log in to access all areas</h2>
-        <form method="POST">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <button>Log in</button>
-        <p>Username or password incorrect or not found. Please log in again or sign up.</p>
-      </form>`
+          /* html */ `   
+          <h2>Please log in to access all areas</h2>
+          <form method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password">
+          <button>Log in</button>
+          <p>Username or password incorrect or not found. Please log in again or sign up.</p>
+          </form>
+          `
         );
+        response.send(html);
+      } else {
+        // if user exists create new session in database
+        return auth.createSession(user);
       }
-      response.send(html);
     })
     // Add user to session in the browser cookies
     .then((sid) => {

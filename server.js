@@ -3,6 +3,7 @@ const server = express();
 const signup = require("./routes/signup.js");
 const login = require("./routes/login");
 const home = require("./routes/home.js");
+const logout = require("./routes/logout.js");
 const logger = require("./middleware/logger");
 
 const bodyHandler = express.urlencoded({ extended: false });
@@ -24,6 +25,8 @@ server.get("/", home.get);
 
 server.get("/login", login.get);
 server.post("/login", login.post);
+
+server.post("/logout", logout.post);
 
 const PORT = process.env.PORT || 3000;
 

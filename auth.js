@@ -19,13 +19,23 @@ function createUser(username, password) {
 
 function verifyUser(username, password) {
   return model.getUser(username).then((user) => {
-    if (!user) {
-      return false;
-    } else {
+    if (user) {
       // bcrypt compare will have to happen password
-      return user;
+      return bcrypt.compare(password, user.password).then((result) => {
+        if (result) return user;
+      });
+    } else {
+      console.error("User cannot be verified (no such user)");
+      return false;
     }
   });
 }
 
-module.exports = { COOKIE_OPTIONS, verifyUser, createUser };
+function createSession(user) {
+  const sid = crypto.randomBytes(18).toString("base64");
+  return model.createSession(sid, user).then((result) => {
+    return result.sid;
+  });
+}
+
+module.exports = { COOKIE_OPTIONS, verifyUser, createUser, createSession };

@@ -45,21 +45,32 @@ function get(request, response) {
   }
   let posts = "";
 
-  return model.getPosts().then((data) => {
-    data.forEach((item) => {
-      console.log(item);
-      return (posts =
-        posts +
-        //we still need to add the image!
-        `
+  return model
+    .getPosts()
+    .then((data) => {
+      data.forEach((item) => {
+        console.log(item);
+        return (posts =
+          posts +
+          //we still need to add the image!
+          `
      <div>
      <p>${item.username}</p>
      <p>${item.item_name}</p>
      <p>${item.item_info}</p>
      </div>`);
+      });
+      response.send(layout("SeliBay-home", header.concat(form)));
+    })
+    .catch(() => {
+      response.status(401).send(
+        layout(
+          `Error`,
+          `<h1>Whoops, something went wrong 😢</h1>
+          <a href="/"/>Click here to go back to the homepage</a>`
+        )
+      );
     });
-    response.send(layout("SeliBay-home", header.concat(form + posts)));
-  });
 }
 
 module.exports = { get };

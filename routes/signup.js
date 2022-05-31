@@ -14,7 +14,7 @@ function get(request, response) {
         <div id="passwordRequirements" class="requirements">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</div>
         <input type="password"
                id="password"
-               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+               aria-label="Enter your password" minlength="8"
                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/><br><br>
 
         <button type="submit" aria-label="click button to submit">Submit</button>

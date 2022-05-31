@@ -54,6 +54,12 @@ function getSessions() {
     .then((results) => results.rows[results.rows.length - 1]);
 }
 
+// Get signed in user posts ONLY
+function userPosts(userID) {
+  const SELECT_POSTS = `SELECT * FROM posts WHERE user_id=$1`;
+  return db.query(SELECT_POSTS, [userID]).then((results) => results.rows);
+}
+
 module.exports = {
   getUser,
   createUser,
@@ -62,4 +68,5 @@ module.exports = {
   getPosts,
   getSessions,
   deletePost,
+  userPosts,
 };

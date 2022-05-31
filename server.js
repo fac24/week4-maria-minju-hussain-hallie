@@ -2,6 +2,7 @@ const express = require("express");
 const server = express();
 const signup = require("./routes/signup.js");
 const login = require("./routes/login");
+const logout = require("./routes/logout");
 const home = require("./routes/home.js");
 const logger = require("./middleware/logger");
 
@@ -24,6 +25,8 @@ server.get("/", home.get);
 
 server.get("/login", login.get);
 server.post("/login", login.post);
+
+server.post("/logout", logout.post);
 
 const PORT = process.env.PORT || 3000;
 

@@ -14,7 +14,9 @@ function createUser(username, password) {
   return bcrypt
     .hash(password, 10)
     .then((hash) => model.createUser(username, hash))
-    .then((user) => model.createSession(sid, user));
+    .then((user) => {
+      model.createSession(sid, user);
+    });
 }
 
 function verifyUser(username, password) {

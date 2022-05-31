@@ -1,7 +1,13 @@
-const multer = require("multer");
+const model = require("../database/model");
 
 function post(request, response) {
-  console.log("///", request.body);
+  const item = request.body;
+  const file = request.file;
+  const image = file.buffer;
+  return model.createPost(item, image).then((result) => {
+    console.log(result);
+    response.redirect("/");
+  });
 }
 
 module.exports = { post };

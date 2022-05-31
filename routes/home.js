@@ -4,8 +4,8 @@ const model = require("../database/model.js");
 function get(request, response) {
   const title = "SeliBay-home";
   let header = "";
-  let form = `
-  <form action="/post" method="post" enctype="multipart/form-data">
+  let form = /*html*/ `
+  <form action="/add-post" method="POST" enctype="multipart/form-data">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
   <label for="product-price"> Product Price </label>
@@ -48,7 +48,7 @@ function get(request, response) {
     .getPosts()
     .then((data) => {
       data.forEach((item) => {
-        console.log(item);
+        // console.log(item);
         return (posts =
           posts +
           //we still need to add the image!

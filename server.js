@@ -12,7 +12,8 @@ const bodyHandler = express.urlencoded({ extended: false });
 const staticHandler = express.static("public");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.memoryStorage();
+const upload = multer({ dest: "uploads/", storage: storage });
 
 server.use(cookieParser(process.env.COOKIE_SECRET));
 
@@ -28,7 +29,7 @@ server.post("/signup", signup.post);
 server.get("/login", login.get);
 server.post("/login", login.post);
 
-server.post("/add-post", addPost.post);
+server.post("/add-post", upload.single("item_image"), addPost.post);
 server.post("/logout", logout.post);
 
 const PORT = process.env.PORT || 3000;

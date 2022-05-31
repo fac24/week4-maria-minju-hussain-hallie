@@ -21,8 +21,6 @@ server.get("/", home.get);
 server.get("/signup", signup.get);
 server.post("/signup", signup.post);
 
-server.get("/", home.get);
-
 server.get("/login", login.get);
 server.post("/login", login.post);
 

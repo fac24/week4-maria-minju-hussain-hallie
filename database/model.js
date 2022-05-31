@@ -24,4 +24,10 @@ function createSession(sid, user) {
   return db.query(INSERT_SESSION, [sid, user]).then((result) => result.rows[0]);
 }
 
-module.exports = { getUser, createUser, createSession };
+// Delete a session on logout
+function deleteSession(sid) {
+  const DELETE_SESSION = `DELETE FROM sessions WHERE sid=$1`;
+  return db.query(DELETE_SESSION, [sid]);
+}
+
+module.exports = { getUser, createUser, createSession, deleteSession };

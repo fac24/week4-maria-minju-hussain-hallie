@@ -11,10 +11,10 @@ function get(request, response) {
         <input type="text" name="username" id="username" required/><br>
 
         <label for="password"> Password <span style="color:#ff0000" aria-hidden="true">*</span></label>
-        <div id="passwordRequirements" class="requirements">Password should be at least 6 characters long</div>
+        <div id="passwordRequirements" class="requirements">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</div>
         <input type="password"
                id="password"
-               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/><br><br>
 
         <button type="submit" aria-label="click button to submit">Submit</button>

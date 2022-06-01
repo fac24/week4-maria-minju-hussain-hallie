@@ -33,7 +33,8 @@ function get(request, response) {
 }
 
 function post(request, response) {
-  const { username, password } = request.body;
+  let { username, password } = request.body;
+  password = String(password);
   model.getUser(username).then((user) => {
     //If database doesn't have username that user typed then will return user as undefined
     if (user === undefined) {

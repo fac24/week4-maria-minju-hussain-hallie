@@ -5,7 +5,7 @@ function get(request, response) {
   const title = "seliBay";
   let header = "";
   let form = `
-  <form action="/post" method="post" enctype="multipart/form-data" class="form">
+  <form action="/add-post" method="post" enctype="multipart/form-data" class="form">
   <label for="product-name"> Product Name </label>
   <input type="text" id="product-name" name="item_name" />
   <label for="product-price"> Product Price </label>

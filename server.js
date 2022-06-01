@@ -41,17 +41,17 @@ const upload = multer();
 server.post("/add-post", upload.single("item_image"), addPost.post);
 
 //not sure if this will work
-// server.get("/images/:id", addPost.get);
+server.get("/images/:id", addPost.get);
 
-server.get("/image/:id", (req, res) => {
-  const id = req.params.id;
-  db.query(
-    "select item_name , item_price , item_info , item_image from posts where id = $1",
-    [id]
-  );
-  const bytes = result.row[0].image;
-  res.type("image/png").send(bytes);
-});
+// server.get("/image/:id", (req, res) => {
+//   const id = req.params.id;
+//   db.query(
+//     "select item_name , item_price , item_info , item_image from posts where id = $1",
+//     [id]
+//   );
+//   const bytes = result.row[0].item_image;
+//   res.type("image/png").send(bytes);
+// });
 
 const PORT = process.env.PORT || 3000;
 

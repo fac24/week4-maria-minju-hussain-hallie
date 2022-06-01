@@ -25,11 +25,10 @@ function post(request, response) {
 
 function get(request, response) {
   const id = request.params.id;
-
   return model
     .fetchPost(id)
     .then(() => {
-      const bytes = result.row[0].image;
+      const bytes = result.row[0].item_image;
       response.type("image/png").send(bytes).redirect("/");
     })
     .catch((error) => {

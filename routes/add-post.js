@@ -23,4 +23,25 @@ function post(request, response) {
     });
 }
 
-module.exports = { post };
+function get(request, response) {
+  const id = request.params.id;
+
+  return model
+    .fetchPost(id)
+    .then(() => {
+      const bytes = result.row[0].image;
+      response.type("image/png").send(bytes).redirect("/");
+    })
+    .catch((error) => {
+      console.error(error);
+      response.status(400).send(
+        layout(
+          `Error`,
+          `<h1>Whoops, post not found  😢</h1>
+          <a href="/"/>Click here to go back to the homepage</a>`
+        )
+      );
+    });
+}
+
+module.exports = { post, get };

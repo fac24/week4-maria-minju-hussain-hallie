@@ -9,13 +9,16 @@ function get(request, response) {
       layout("My items", `<a href="/login">Please login to view this page</a>`)
     );
   } else {
-    const header = `  <h1>SeliBay - my items</h1>
-      <header>
+    const header = `
+  <div class="flex">
+  <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
+  <div>
       <form action="/logout" method="post">
-      <button>Logout</button>
+      <button class="button logout">Logout</button>
       </form>
-      <a href="/">Home Page</a>
-      </header>`;
+      <a href="/" class="button login">Home Page</a>
+  </div>
+ </div>`;
 
     const posts = "";
 

@@ -79,7 +79,8 @@ function get(request, response) {
       });
       response.send(layout("SeliBay-home", header.concat(form + posts)));
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error);
       response
         .status(401)
         .send(

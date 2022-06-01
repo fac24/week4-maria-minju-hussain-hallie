@@ -7,13 +7,13 @@ function get(request, response) {
     <header class="flex">
     <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
     <div>
-    <a href="/signup" class="button signup">Sign up</a>
+    <a href="/login" class="button signup">Login</a>
     </div>
     </header>
   `;
 
   const body = /*html*/ `
-    <h2>Please sign up here</h1>
+    <h2>Please sign up here</h2>
         <form method="POST" action ="/signup">
        
         <label for="username"> Username <span style="color:#ff0000" aria-hidden="true">*</span></label>
@@ -42,7 +42,8 @@ function post(request, response) {
         .then((sid) => {
           response.cookie("sid", sid, auth.COOKIE_OPTIONS).redirect("/");
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error(error);
           response.status(401).send(
             layout(
               `Error`,

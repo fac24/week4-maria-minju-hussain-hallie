@@ -40,7 +40,8 @@ function get(request, response) {
         });
       })
       .then(response.send(layout("My items", header.concat(posts))))
-      .catch(() => {
+      .catch((error) => {
+        console.error(error);
         response.status(401).send(
           layout(
             `Error`,

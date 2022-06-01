@@ -60,6 +60,17 @@ function userPosts(userID) {
   return db.query(SELECT_POSTS, [userID]).then((results) => results.rows);
 }
 
+function createPost(item, image) {
+  const query_text = /*sql*/ `
+    INSERT INTO posts (item_name , item_price , item_info , item_image)
+    VALUES ($1,$2,$3,$4)
+    RETURNING item_name, item_price, item_info , item_image;
+  `;
+  return db
+    .query(query_text, [item.item_name, item.item_price, item.item_info, image])
+    .then((result) => result.rows[0]);
+}
+
 module.exports = {
   getUser,
   createUser,
@@ -69,4 +80,5 @@ module.exports = {
   getSessions,
   deletePost,
   userPosts,
+  createPost,
 };

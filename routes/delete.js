@@ -6,7 +6,8 @@ function post(request, response) {
   return model
     .deletePost(post_id)
     .then(response.redirect("/"))
-    .catch(() => {
+    .catch((error) => {
+      console.error(error);
       response.status(401).send(
         layout(
           `Error`,

@@ -3,8 +3,17 @@ const layout = require("../layout.js");
 const auth = require("../auth.js");
 
 function get(request, response) {
+  header = `
+    <header class="flex">
+    <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
+    <div>
+    <a href="/login" class="button signup">Login</a>
+    </div>
+    </header>
+  `;
+
   const body = /*html*/ `
-    <h1>Please sign up here</h1>
+    <h2>Please sign up here</h2>
         <form method="POST" action ="/signup">
        
         <label for="username"> Username <span style="color:#ff0000" aria-hidden="true">*</span></label>
@@ -14,18 +23,18 @@ function get(request, response) {
         <div id="passwordRequirements" class="requirements">Password should be at least 6 characters long</div>
         <input type="password"
                id="password"
-               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/><br><br>
+              required/><br><br>
 
         <button type="submit" class="button login" aria-label="click button to submit">Submit</button>
         
         </form>
     `;
-  response.send(layout("signup", body));
+  response.send(layout("signup", header.concat(body)));
 }
 
 function post(request, response) {
-  const { username, password } = request.body;
+  let { username, password } = request.body;
+  password = String(password);
   model.getUser(username).then((user) => {
     //If database doesn't have username that user typed then will return user as undefined
     if (user === undefined) {
@@ -34,7 +43,8 @@ function post(request, response) {
         .then((sid) => {
           response.cookie("sid", sid, auth.COOKIE_OPTIONS).redirect("/");
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error(error);
           response.status(401).send(
             layout(
               `Error`,

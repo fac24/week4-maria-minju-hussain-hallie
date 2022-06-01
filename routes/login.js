@@ -1,17 +1,17 @@
 const auth = require("../auth.js");
 const layout = require("../layout.js");
 
-function get(request, response) {
-  header = `
-    <div class="flex">
-  <h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
-    <header>
-    <div>
-    <a href="/signup" class="button signup">sign-up</a>
-    </div>
-    </div>
-    </header>`;
+const header = `
+  <div class="flex">
+<h1><span class="red">se</span><span class="blue">li</span><span class="yellow">B</span><span class="green">ay</span></h1>
+  <header>
+  <div>
+  <a href="/signup" class="button signup">sign-up</a>
+  </div>
+  </div>
+  </header>`;
 
+function get(request, response) {
   const html = layout(
     "Login to selibay",
     `   
@@ -50,7 +50,7 @@ function post(request, response) {
           </form>
           `
         );
-        response.send(html);
+        response.send(header.concat(html));
       } else {
         // if user exists create new session in database
         return auth.createSession(user);
@@ -61,7 +61,8 @@ function post(request, response) {
       response.cookie("sid", sid, auth.COOKIE_OPTIONS);
       response.redirect("/");
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error);
       response.status(401).send(
         layout(
           `Error`,

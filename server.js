@@ -1,10 +1,14 @@
 const express = require("express");
+const multer = require("multer");
+
 const server = express();
 const signup = require("./routes/signup.js");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const home = require("./routes/home.js");
 const deletePost = require("./routes/delete.js");
+const addPost = require("./routes/add-post.js");
+
 const myitems = require("./routes/myitems.js");
 const logger = require("./middleware/logger");
 
@@ -31,6 +35,9 @@ server.get("/myitems", myitems.get);
 server.post("/logout", logout.post);
 
 server.post("/delete", deletePost.post);
+
+const upload = multer();
+server.post("/add-post", upload.single("item_image"), addPost.post);
 
 const PORT = process.env.PORT || 3000;
 

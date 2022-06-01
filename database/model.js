@@ -73,9 +73,9 @@ function createPost(item, image) {
 
 function fetchPost(id) {
   const FETCH_POST = /*sql*/ `
-  select image from posts where id = $1
+  select item_name , item_price , item_info , item_image from posts where id = $1
   `;
-  return db.query(FETCH_POST, [id]).then((result) => result.rows[0] - image);
+  return db.query(FETCH_POST, [id]).then((result) => result.rows[0]);
 }
 
 module.exports = {
